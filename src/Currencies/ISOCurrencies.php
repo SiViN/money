@@ -100,4 +100,13 @@ final class ISOCurrencies implements Currencies
 
         throw new \RuntimeException('Failed to load currency ISO codes.');
     }
+
+    public function nameFor(Currency $currency)
+    {
+        if (!$this->contains($currency)) {
+            throw new UnknownCurrencyException('Cannot find ISO currency '.$currency->getCode());
+        }
+
+        return $this->getCurrencies()[$currency->getCode()]['currency'];
+    }
 }
